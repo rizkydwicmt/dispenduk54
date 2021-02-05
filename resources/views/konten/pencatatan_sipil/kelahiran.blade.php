@@ -167,16 +167,22 @@
                         //insert tbody
                         if(data.length > 0)
                         {
+                            let sum_LK = 0;
+                            let sum_LP = 0;
+
                             html += "<tbody>";
                             for(let i=0; i<data.length; i++)
                             {
+                                sum_LK = sum_LK+parseInt(data[i]?.LK);
+                                sum_LP = sum_LP+parseInt(data[i]?.LP);
                                 html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.LK+"</td><td>"+data[i]?.LP+"</td></tr>";
                             }
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_LK+"</td><td>"+sum_LP+"</td></tr>";
                             html += "</tbody>";
                         } 
                         else
                         {
-                            html += "<tbody><tr role='row'><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -192,16 +198,27 @@
                         //insert tbody
                         if(data.length > 0) 
                         {
+                            let sum_LAKI_LAKI = 0;
+                            let sum_PEREMPUAN = 0;
+                            let sum_ADA_AKTA = 0;
+                            let sum_TIDAK_ADA_AKTA = 0;
+
                             html += "<tbody>";
                             for(let i=0; i<data.length; i++)
                             {
-                                html += "<tr role='row'><td>"+data[i]?.SORT+"</td><td>"+data[i]?.STRUKTUR_UMUR+"</td><td>"+data[i]?.LAKI_LAKI+"</td><td>"+data[i]?.PEREMPUAN+"</td><td>"+data[i]?.ADA_AKTA+"</td><td>"+data[i]?.TIDAK_ADA_AKTA+"</td></tr>";
+                                sum_LAKI_LAKI = sum_LAKI_LAKI+parseInt(data[i]?.LAKI_LAKI);
+                                sum_PEREMPUAN = sum_PEREMPUAN+parseInt(data[i]?.PEREMPUAN);
+                                sum_ADA_AKTA = sum_ADA_AKTA+parseInt(data[i]?.ADA_AKTA);
+                                sum_TIDAK_ADA_AKTA = sum_TIDAK_ADA_AKTA+parseInt(data[i]?.TIDAK_ADA_AKTA);
+
+                                html += "<tr role='row'><td>"+data[i]?.SORT+"</td><td>"+data[i]?.LAKI_LAKI+"</td><td>"+data[i]?.PEREMPUAN+"</td><td>"+data[i]?.ADA_AKTA+"</td><td>"+data[i]?.TIDAK_ADA_AKTA+"</td></tr>";
                             }
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>SEMUA</td><td>"+sum_LAKI_LAKI+"</td><td>"+sum_PEREMPUAN+"</td><td>"+sum_ADA_AKTA+"</td><td>"+sum_TIDAK_ADA_AKTA+"</td></tr>";
                             html += "<tbody>";
                         } 
                         else
                         {
-                            html += "<tbody><tr role='row'><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -217,16 +234,28 @@
                         //insert tbody
                         if(data.length > 0) 
                         {
+                            let sum_POLINDES = 0;
+                            let sum_PUSKESMAS = 0;
+                            let sum_RS = 0;
+                            let sum_RUMAH = 0;
+                            let sum_LAINNYA = 0;
                             html += "<tbody>";
                             for(let i=0; i<data.length; i++)
                             {
+                                sum_POLINDES = sum_POLINDES+parseInt(data[i]?.POLINDES);
+                                sum_PUSKESMAS = sum_PUSKESMAS+parseInt(data[i]?.PUSKESMAS);
+                                sum_RS = sum_RS+parseInt(data[i]?.RS);
+                                sum_RUMAH = sum_RUMAH+parseInt(data[i]?.RUMAH);
+                                sum_LAINNYA = sum_LAINNYA+parseInt(data[i]?.LAINNYA);
+
                                 html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.POLINDES+"</td><td>"+data[i]?.PUSKESMAS+"</td><td>"+data[i]?.RS+"</td><td>"+data[i]?.RUMAH+"</td><td>"+data[i]?.LAINNYA+"</td></tr>";
                             }
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_POLINDES+"</td><td>"+sum_PUSKESMAS+"</td><td>"+sum_RS+"</td><td>"+sum_RUMAH+"</td><td>"+sum_LAINNYA+"</td></tr>";
                             html += "<tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row'><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -242,16 +271,29 @@
                         //insert tbody
                         if(data.length > 0) 
                         {
+                            let sum_L1 = 0;
+                            let sum_L2 = 0;
+                            let sum_L3 = 0;
+                            let sum_L4 = 0;
+                            let sum_L5 = 0;
+
                             html += "<tbody>";
                             for(let i=0; i<data.length; i++)
                             {
+                                sum_L1 = sum_L1+parseInt(data[i]?.L1);
+                                sum_L2 = sum_L2+parseInt(data[i]?.L2);
+                                sum_L3 = sum_L3+parseInt(data[i]?.L3);
+                                sum_L4 = sum_L4+parseInt(data[i]?.L4);
+                                sum_L5 = sum_L5+parseInt(data[i]?.L5);
+
                                 html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.L1+"</td><td>"+data[i]?.L2+"</td><td>"+data[i]?.L3+"</td><td>"+data[i]?.L4+"</td><td>"+data[i]?.L5+"</td></tr>";
                             }
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_L1+"</td><td>"+sum_L2+"</td><td>"+sum_L3+"</td><td>"+sum_L4+"</td><td>"+sum_L5+"</td></tr>";
                             html += "<tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row'><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
