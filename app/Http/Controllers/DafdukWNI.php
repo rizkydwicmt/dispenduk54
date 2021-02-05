@@ -206,10 +206,12 @@ class DafdukWNI extends Controller
                 ->whereMonth('BLN', $tanggal[1])
                 ->whereYear('BLN', $tanggal[0])
                 ->where('NO_PROP', $request->provinsi)
-                ->where('NO_KAB', $request->kabupaten)
-                ->where('NO_KEC', $request->kecamatan)
-                ->where('NO_KEL', $request->kelurahan)
-                ->get();
+                ->where('NO_KAB', $request->kabupaten);
+
+        if($request->kecamatan !== 'semua') $data->where('NO_KEC', $request->kecamatan);
+        if($request->kelurahan !== 'semua') $data->where('NO_KEL', $request->kelurahan);
+
+        $data = $data->get();
                 
         return $data;
     }
@@ -231,10 +233,12 @@ class DafdukWNI extends Controller
                 ->whereMonth('BLN', $tanggal[1])
                 ->whereYear('BLN', $tanggal[0])
                 ->where('NO_PROP', $request->provinsi)
-                ->where('NO_KAB', $request->kabupaten)
-                ->where('NO_KEC', $request->kecamatan)
-                ->where('NO_KEL', $request->kelurahan)
-                ->get();
+                ->where('NO_KAB', $request->kabupaten);
+
+        if($request->kecamatan !== 'semua') $data->where('NO_KEC', $request->kecamatan);
+        if($request->kelurahan !== 'semua') $data->where('NO_KEL', $request->kelurahan);
+
+        $data = $data->get();
                 
         return $data;
     }
