@@ -59,7 +59,7 @@
                                         <label for="first-name-column">Kecamatan</label>
                                         <fieldset class="form-group">
                                             <select  class="form-select" name='kecamatan' id='kecamatan' onClick="select_kecamatan()" required>
-                                                <option>-- PILIH --</option>
+                                                <option value="semua">SEMUA</option>
                                                 <option></option>
                                                 <option></option>
                                                 <option></option>
@@ -74,7 +74,7 @@
                                         <fieldset class="form-group">
                                             <select class="form-select" name='kelurahan' id='kelurahan'
                                             onClick="select_kelurahan()" required>
-                                                <option>-- PILIH --</option>
+                                                <option value="semua">SEMUA</option>
                                                 <option></option>
                                                 <option></option>
                                                 <option></option>
@@ -163,7 +163,7 @@
     <script>
         function select_kecamatan(){
             const token = $('meta[name="csrf-token"]').attr('content');
-            $('#kelurahan').html("<option>-- PILIH --</option><option></option><option></option><option></option><option></option>");
+            $('#kelurahan').html("<option value='semua'>SEMUA</option><option></option><option></option><option></option><option></option>");
             if(isNaN($('#kecamatan').val()))
                 $.ajax({
                     headers: {
@@ -178,7 +178,7 @@
                     dataType : 'json',
                     //jika ajax sukses
                     success: function(data){
-                        let html = '';
+                        let html = "<option value='semua'>SEMUA</option>";
                         for(let i=0; i<data.length; i++){
                             html += '<option value='+data[i].NO_KEC+'>'+data[i].NAMA_KEC+'</option>';
                         }
@@ -194,35 +194,31 @@
 
         function select_kelurahan(){
             const token = $('meta[name="csrf-token"]').attr('content');
-            if(isNaN($('#kecamatan').val())){
-                swal.fire("Error", "Silahkan isi kecamatan terlebih dahulu", "error");
-            }else{
-                if(isNaN($('#kelurahan').val()))
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': token
+            if(isNaN($('#kelurahan').val()))
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                url: "{{ url('/get_kelurahan') }}",
+                type: "POST",
+                data: {
+                        id: $('#kecamatan').val(),
                     },
-                    url: "{{ url('/get_kelurahan') }}",
-                    type: "POST",
-                    data: {
-                            id: $('#kecamatan').val(),
-                        },
-                    async : true,
-                    dataType : 'json',
-                    //jika ajax sukses
-                    success: function(data){
-                        let html = '';
-                        for(let i=0; i<data.length; i++){
-                            html += '<option value='+data[i].NO_KEL+'>'+data[i].NAMA_KEL+'</option>';
-                        }
-                        $('#kelurahan').html(html);
-                    },
-                    //jika ajax gagal
-                    error: function () {
-                        swal.fire("Error", "Periksa koneksi anda", "error");
+                async : true,
+                dataType : 'json',
+                //jika ajax sukses
+                success: function(data){
+                    let html = "<option value='semua'>SEMUA</option>";
+                    for(let i=0; i<data.length; i++){
+                        html += '<option value='+data[i].NO_KEL+'>'+data[i].NAMA_KEL+'</option>';
                     }
-                });
-            }
+                    $('#kelurahan').html(html);
+                },
+                //jika ajax gagal
+                error: function () {
+                    swal.fire("Error", "Periksa koneksi anda", "error");
+                }
+            });
         }
 
         /* Send Form Add */
@@ -238,91 +234,85 @@
             $('#thead').html(""); 
             $('#tbody').html("");
 
-            if(isNaN($('#kecamatan').val()) || isNaN($('#kelurahan').val())){
-                swal.fire("Error", "Silahkan isi kecamatan dan kelurahan terlebih dahulu", "error");
-            } 
-                else 
-            {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': token
-                    },
-                    // url: "{{ url('/dafduk_wni/kk_statistik') }}",
-                    type: "POST",
-                    data: formData,
-                    dataType: "html",
-                    contentType: false,
-                    processData: false,
-                    //jika ajax sukses
-                    success: function(data){
-                        data = JSON.parse(data);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                // url: "{{ url('/dafduk_wni/kk_statistik') }}",
+                type: "POST",
+                data: formData,
+                dataType: "html",
+                contentType: false,
+                processData: false,
+                //jika ajax sukses
+                success: function(data){
+                    data = JSON.parse(data);
 
-                        if($('#statistik').val() == 1)
-                        {
-                            $('#thead').html("<th scope='col'>Laki-Laki</th><th scope='col'>Perempuan</th>"); 
-                            $('#tbody').html("<td>0</td><td>0</td>");
-                            if(data.length > 0) $('#tbody').html("<td>"+data[0]?.LK+"</td><td>"+data[0]?.LP+"</td>");
-                            $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut jenis Kelamin"); 
-                        }
-    
-                        if($('#statistik').val() == 2)
-                        {
-                            $('#thead').html("<th scope='col'>PDD01</th><th scope='col'>PDD02</th><th scope='col'>PDD03</th><th scope='col'>PDD04</th><th scope='col'>PDD05</th><th scope='col'>PDD06</th><th scope='col'>PDD07</th><th scope='col'>PDD08</th><th scope='col'>PDD09</th><th scope='col'>PDD10</th>"); 
-                            $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
-                            if(data.length > 0) $('#tbody').html("<td>"+data[0]?.PDD01+"</td><td>"+data[0]?.PDD02+"</td><td>"+data[0]?.PDD03+"</td><td>"+data[0]?.PDD04+"</td><td>"+data[0]?.PDD05+"</td><td>"+data[0]?.PDD06+"</td><td>"+data[0]?.PDD07+"</td><td>"+data[0]?.PDD08+"</td><td>"+data[0]?.PDD09+"</td><td>"+data[0]?.PDD10+"</td>");
-                            $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Pendidikan Terakhir"); 
-                        }
-    
-                        if($('#statistik').val() == 3)
-                        {
-                            $('#thead').html("<th scope='col'>Belum Kawin</th><th scope='col'>Kawin</th><th scope='col'>Cerai Hidup</th><th scope='col'>Cerai Mati</th>"); 
-                            $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td>");
-                            if(data.length > 0) $('#tbody').html("<td>"+data[0]?.BELUM_KAWIN+"</td><td>"+data[0]?.KAWIN+"</td><td>"+data[0]?.CERAI_HIDUP+"</td><td>"+data[0]?.CERAI_MATI+"</td>");
-                            $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Status Perkawinan"); 
-                        }
-    
-                        if($('#statistik').val() == 4)
-                        {
-                            $('#thead').html("<th scope='col'>A</th><th scope='col'>B</th><th scope='col'>AB</th><th scope='col'>O</th><th scope='col'>A+</th><th scope='col'>A-</th><th scope='col'>B+</th><th scope='col'>B-</th><th scope='col'>AB+</th><th scope='col'>AB-</th><th scope='col'>0+</th><th scope='col'>0-</th><th scope='col'>Tidak Tahu</th>"); 
-                            $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
-                            if(data.length > 0) $('#tbody').html("<td>"+data[0]?.A+"</td><td>"+data[0]?.B+"</td><td>"+data[0]?.AB+"</td><td>"+data[0]?.O+"</td><td>"+data[0]?.A_POS+"</td><td>"+data[0]?.A_MIN+"</td><td>"+data[0]?.B_POS+"</td><td>"+data[0]?.B_MIN+"</td><td>"+data[0]?.AB_POS+"</td><td>"+data[0]?.AB_MIN+"</td><td>"+data[0]?.O_POS+"</td><td>"+data[0]?.O_MIN+"</td><td>"+data[0]?.TIDAK_TAHU+"</td>");
-                            $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Golongan Darah"); 
-                        }
-    
-                        if($('#statistik').val() == 5)
-                        {
-                            $('#thead').html("<th scope='col'>Islam</th><th scope='col'>Kristen</th><th scope='col'>Katholik</th><th scope='col'>Hindu</th><th scope='col'>Budha</th><th scope='col'>Konghucu</th><th scope='col'>Kepercayaan</th>");
-                            $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
-                            if(data.length > 0) $('#tbody').html("<td>"+data[0]?.ISLAM+"</td><td>"+data[0]?.KRISTEN+"</td><td>"+data[0]?.KATHOLIK+"</td><td>"+data[0]?.HINDU+"</td><td>"+data[0]?.BUDHA+"</td><td>"+data[0]?.KONGHUCU+"</td><td>"+data[0]?.KEPERCAYAAN+"</td>");
-                            $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Agama"); 
-                        }
-    
-                        if($('#statistik').val() == 6)
-                        {
-                            $('#thead').html("<th scope='col'>Fisik</th><th scope='col'>Netra</th><th scope='col'>Rungu</th><th scope='col'>Mental</th><th scope='col'>Fisik Mental</th><th scope='col'>Lainnya</th>"); 
-                            $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
-                            if(data.length > 0) $('#tbody').html("<td>"+data[0]?.FISIK+"</td><td>"+data[0]?.NETRA+"</td><td>"+data[0]?.RUNGU+"</td><td>"+data[0]?.MENTAL+"</td><td>"+data[0]?.FISIK_MENTAL+"</td><td>"+data[0]?.LAINNYA+"</td>");
-                            $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Penyandang Cacat"); 
-                        }
-                        
-                        // $('#tabel').DataTable().destroy();
-                        // $('#tabel').DataTable({
-                        //     dom: 'Bfrtip',
-                        //     buttons: [
-                        //         'copy', 'csv', 'excel', 'pdf', 'print'
-                        //     ],
-                        //     rowReorder: {
-                        //         selector: 'td:nth-child(2)'
-                        //     },
-                        //     responsive: true
-                        // });
-                    },
-                    //jika ajax gagal
-                    error: function () {
-                        swal.fire("Error", "Periksa koneksi anda", "error");
+                    if($('#statistik').val() == 1)
+                    {
+                        $('#thead').html("<th scope='col'>Laki-Laki</th><th scope='col'>Perempuan</th>"); 
+                        $('#tbody').html("<td>0</td><td>0</td>");
+                        if(data.length > 0) $('#tbody').html("<td>"+data[0]?.LK+"</td><td>"+data[0]?.LP+"</td>");
+                        $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut jenis Kelamin"); 
                     }
-                });
-            }
+
+                    if($('#statistik').val() == 2)
+                    {
+                        $('#thead').html("<th scope='col'>PDD01</th><th scope='col'>PDD02</th><th scope='col'>PDD03</th><th scope='col'>PDD04</th><th scope='col'>PDD05</th><th scope='col'>PDD06</th><th scope='col'>PDD07</th><th scope='col'>PDD08</th><th scope='col'>PDD09</th><th scope='col'>PDD10</th>"); 
+                        $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
+                        if(data.length > 0) $('#tbody').html("<td>"+data[0]?.PDD01+"</td><td>"+data[0]?.PDD02+"</td><td>"+data[0]?.PDD03+"</td><td>"+data[0]?.PDD04+"</td><td>"+data[0]?.PDD05+"</td><td>"+data[0]?.PDD06+"</td><td>"+data[0]?.PDD07+"</td><td>"+data[0]?.PDD08+"</td><td>"+data[0]?.PDD09+"</td><td>"+data[0]?.PDD10+"</td>");
+                        $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Pendidikan Terakhir"); 
+                    }
+
+                    if($('#statistik').val() == 3)
+                    {
+                        $('#thead').html("<th scope='col'>Belum Kawin</th><th scope='col'>Kawin</th><th scope='col'>Cerai Hidup</th><th scope='col'>Cerai Mati</th>"); 
+                        $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td>");
+                        if(data.length > 0) $('#tbody').html("<td>"+data[0]?.BELUM_KAWIN+"</td><td>"+data[0]?.KAWIN+"</td><td>"+data[0]?.CERAI_HIDUP+"</td><td>"+data[0]?.CERAI_MATI+"</td>");
+                        $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Status Perkawinan"); 
+                    }
+
+                    if($('#statistik').val() == 4)
+                    {
+                        $('#thead').html("<th scope='col'>A</th><th scope='col'>B</th><th scope='col'>AB</th><th scope='col'>O</th><th scope='col'>A+</th><th scope='col'>A-</th><th scope='col'>B+</th><th scope='col'>B-</th><th scope='col'>AB+</th><th scope='col'>AB-</th><th scope='col'>0+</th><th scope='col'>0-</th><th scope='col'>Tidak Tahu</th>"); 
+                        $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
+                        if(data.length > 0) $('#tbody').html("<td>"+data[0]?.A+"</td><td>"+data[0]?.B+"</td><td>"+data[0]?.AB+"</td><td>"+data[0]?.O+"</td><td>"+data[0]?.A_POS+"</td><td>"+data[0]?.A_MIN+"</td><td>"+data[0]?.B_POS+"</td><td>"+data[0]?.B_MIN+"</td><td>"+data[0]?.AB_POS+"</td><td>"+data[0]?.AB_MIN+"</td><td>"+data[0]?.O_POS+"</td><td>"+data[0]?.O_MIN+"</td><td>"+data[0]?.TIDAK_TAHU+"</td>");
+                        $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Golongan Darah"); 
+                    }
+
+                    if($('#statistik').val() == 5)
+                    {
+                        $('#thead').html("<th scope='col'>Islam</th><th scope='col'>Kristen</th><th scope='col'>Katholik</th><th scope='col'>Hindu</th><th scope='col'>Budha</th><th scope='col'>Konghucu</th><th scope='col'>Kepercayaan</th>");
+                        $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
+                        if(data.length > 0) $('#tbody').html("<td>"+data[0]?.ISLAM+"</td><td>"+data[0]?.KRISTEN+"</td><td>"+data[0]?.KATHOLIK+"</td><td>"+data[0]?.HINDU+"</td><td>"+data[0]?.BUDHA+"</td><td>"+data[0]?.KONGHUCU+"</td><td>"+data[0]?.KEPERCAYAAN+"</td>");
+                        $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Agama"); 
+                    }
+
+                    if($('#statistik').val() == 6)
+                    {
+                        $('#thead').html("<th scope='col'>Fisik</th><th scope='col'>Netra</th><th scope='col'>Rungu</th><th scope='col'>Mental</th><th scope='col'>Fisik Mental</th><th scope='col'>Lainnya</th>"); 
+                        $('#tbody').html("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>");
+                        if(data.length > 0) $('#tbody').html("<td>"+data[0]?.FISIK+"</td><td>"+data[0]?.NETRA+"</td><td>"+data[0]?.RUNGU+"</td><td>"+data[0]?.MENTAL+"</td><td>"+data[0]?.FISIK_MENTAL+"</td><td>"+data[0]?.LAINNYA+"</td>");
+                        $('#judul_tabel').html("Statistik Jumlah Kepala Keluarga Menurut Penyandang Cacat"); 
+                    }
+                    
+                    // $('#tabel').DataTable().destroy();
+                    // $('#tabel').DataTable({
+                    //     dom: 'Bfrtip',
+                    //     buttons: [
+                    //         'copy', 'csv', 'excel', 'pdf', 'print'
+                    //     ],
+                    //     rowReorder: {
+                    //         selector: 'td:nth-child(2)'
+                    //     },
+                    //     responsive: true
+                    // });
+                },
+                //jika ajax gagal
+                error: function () {
+                    swal.fire("Error", "Periksa koneksi anda", "error");
+                }
+            });
         });
 
         /* Send Form End */
