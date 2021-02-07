@@ -195,39 +195,46 @@ class DafdukWNI extends Controller
 
     public function statistik_kk(Request $request){
         $tanggal = explode('-', $request->bulan);
-        if($request->statistik == 1) $data = app('db')->table('t5_kepkel_kelamin');
-        if($request->statistik == 2) $data = app('db')->table('t5_kepkel_pendidikan');
-        if($request->statistik == 3) $data = app('db')->table('t5_kepkel_status_perkawinan');
-        if($request->statistik == 4) $data = app('db')->table('t5_kepkel_golongan_darah');
-        if($request->statistik == 5) $data = app('db')->table('t5_kepkel_agama');
-        if($request->statistik == 6) $data = app('db')->table('t5_kepkel_penyandang_cacat');
+        if($request->statistik == 1) $data = app('db')->table('t5_kepkel_kelamin as t');
+        if($request->statistik == 2) $data = app('db')->table('t5_kepkel_pendidikan as t');
+        if($request->statistik == 3) $data = app('db')->table('t5_kepkel_status_perkawinan as t');
+        if($request->statistik == 4) $data = app('db')->table('t5_kepkel_golongan_darah as t');
+        if($request->statistik == 5) $data = app('db')->table('t5_kepkel_agama as t');
+        if($request->statistik == 6) $data = app('db')->table('t5_kepkel_penyandang_cacat as t');
         
         $data = $data
-                ->whereMonth('BLN', $tanggal[1])
-                ->whereYear('BLN', $tanggal[0])
-                ->where('NO_PROP', $request->provinsi)
-                ->where('NO_KAB', $request->kabupaten);
+                ->whereMonth('t.BLN', $tanggal[1])
+                ->whereYear('t.BLN', $tanggal[0])
+                ->where('t.NO_PROP', $request->provinsi)
+                ->where('t.NO_KAB', $request->kabupaten);
 
-        if($request->kecamatan !== 'semua') $data->where('NO_KEC', $request->kecamatan);
-        if($request->kelurahan !== 'semua') $data->where('NO_KEL', $request->kelurahan);
+        if($request->kecamatan !== 'semua') $data->where('t.NO_KEC', $request->kecamatan);
+        if($request->kelurahan !== 'semua') $data->where('t.NO_KEL', $request->kelurahan);
 
-        $data = $data->get();
+        $data = $data
+        ->selectRaw("
+            t.*, 
+            (select c.NAMA_KEC from setup_kec c where c.NO_KEC = t.NO_KEC) as NAMA_KEC,
+            (select l.NAMA_KEL from setup_kel l where l.NO_KEL = t.NO_KEL and l.NO_KEC = t.NO_KEC) as NAMA_KEL
+        ")
+        ->orderBy('t.NO_KEC')
+        ->get();
                 
         return $data;
     }
 
     public function statistik_biodata(Request $request){
         $tanggal = explode('-', $request->bulan);
-        if($request->statistik == 1) $data = app('db')->table('t5_stt_agr_penduduk');
-        if($request->statistik == 2) $data = app('db')->table('t5_stt_struktur_umur');
-        if($request->statistik == 3) $data = app('db')->table('t5_stt_pendidikan');
-        if($request->statistik == 4) $data = app('db')->table('t5_stt_pekerjaan');
-        if($request->statistik == 5) $data = app('db')->table('t5_stt_status_perkawinan');
-        if($request->statistik == 6) $data = app('db')->table('t5_stt_golongan_darah');
-        if($request->statistik == 7) $data = app('db')->table('t5_stt_agama');
-        if($request->statistik == 8) $data = app('db')->table('t5_stt_penyandang_cacat');
-        if($request->statistik == 9) $data = app('db')->table('t5_stt_wajib_ktp');
-        if($request->statistik == 10) $data = app('db')->table('t5_stt_stathbkel');
+        if($request->statistik == 1) $data = app('db')->table('t5_stt_agr_penduduk as t');
+        if($request->statistik == 2) $data = app('db')->table('t5_stt_struktur_umur as t');
+        if($request->statistik == 3) $data = app('db')->table('t5_stt_pendidikan as t');
+        if($request->statistik == 4) $data = app('db')->table('t5_stt_pekerjaan as t');
+        if($request->statistik == 5) $data = app('db')->table('t5_stt_status_perkawinan as t');
+        if($request->statistik == 6) $data = app('db')->table('t5_stt_golongan_darah as t');
+        if($request->statistik == 7) $data = app('db')->table('t5_stt_agama as t');
+        if($request->statistik == 8) $data = app('db')->table('t5_stt_penyandang_cacat as t');
+        if($request->statistik == 9) $data = app('db')->table('t5_stt_wajib_ktp as t');
+        if($request->statistik == 10) $data = app('db')->table('t5_stt_stathbkel as t');
         
         $data = $data
                 ->whereMonth('BLN', $tanggal[1])
@@ -238,7 +245,13 @@ class DafdukWNI extends Controller
         if($request->kecamatan !== 'semua') $data->where('NO_KEC', $request->kecamatan);
         if($request->kelurahan !== 'semua') $data->where('NO_KEL', $request->kelurahan);
 
-        $data = $data->get();
+        $data = $data
+        ->selectRaw("
+            t.*, 
+            (select c.NAMA_KEC from setup_kec c where c.NO_KEC = t.NO_KEC) as NAMA_KEC,
+            (select l.NAMA_KEL from setup_kel l where l.NO_KEL = t.NO_KEL and l.NO_KEC = t.NO_KEC) as NAMA_KEL
+        ")
+        ->get();
                 
         return $data;
     }

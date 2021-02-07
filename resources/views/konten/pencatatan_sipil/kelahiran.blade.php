@@ -162,7 +162,7 @@
                     if($('#statistik').val() == 1)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Laki-Laki</th><th scope='col'>Perempuan</th></thead>"; 
+                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Laki-Laki</th><th scope='col'>Perempuan</th><th scope='col'>TOTAL</th></thead>"; 
 
                         //insert tbody
                         if(data.length > 0)
@@ -175,9 +175,9 @@
                             {
                                 sum_LK = sum_LK+parseInt(data[i]?.LK);
                                 sum_LP = sum_LP+parseInt(data[i]?.LP);
-                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.LK+"</td><td>"+data[i]?.LP+"</td></tr>";
+                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.LK+"</td><td>"+data[i]?.LP+"</td><td>"+(parseInt(data[i]?.LK)+parseInt(data[i]?.LP))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_LK+"</td><td>"+sum_LP+"</td></tr>";
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_LK+"</td><td>"+sum_LP+"</td><td>"+(parseInt(sum_LK)+parseInt(sum_LP))+"</td></tr>";
                             html += "</tbody>";
                         } 
                         else
@@ -229,7 +229,7 @@
                     if($('#statistik').val() == 3)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Bulan</th><th scope='col'>Polindes</th><th scope='col'>Puskesmas</th><th scope='col'>Rumah Sakit</th><th scope='col'>Rumah</th><th scope='col'>Lainnya</th></thead>";
+                        html += "<thead><th scope='col'>Bulan</th><th scope='col'>Polindes</th><th scope='col'>Puskesmas</th><th scope='col'>Rumah Sakit</th><th scope='col'>Rumah</th><th scope='col'>Lainnya</th><th scope='col'>TOTAL</th></thead>";
 
                         //insert tbody
                         if(data.length > 0) 
@@ -248,14 +248,14 @@
                                 sum_RUMAH = sum_RUMAH+parseInt(data[i]?.RUMAH);
                                 sum_LAINNYA = sum_LAINNYA+parseInt(data[i]?.LAINNYA);
 
-                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.POLINDES+"</td><td>"+data[i]?.PUSKESMAS+"</td><td>"+data[i]?.RS+"</td><td>"+data[i]?.RUMAH+"</td><td>"+data[i]?.LAINNYA+"</td></tr>";
+                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.POLINDES+"</td><td>"+data[i]?.PUSKESMAS+"</td><td>"+data[i]?.RS+"</td><td>"+data[i]?.RUMAH+"</td><td>"+data[i]?.LAINNYA+"</td><td>"+(parseInt(data[i]?.POLINDES)+parseInt(data[i]?.PUSKESMAS)+parseInt(data[i]?.RS)+parseInt(data[i]?.RUMAH)+parseInt(data[i]?.LAINNYA))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_POLINDES+"</td><td>"+sum_PUSKESMAS+"</td><td>"+sum_RS+"</td><td>"+sum_RUMAH+"</td><td>"+sum_LAINNYA+"</td></tr>";
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_POLINDES+"</td><td>"+sum_PUSKESMAS+"</td><td>"+sum_RS+"</td><td>"+sum_RUMAH+"</td><td>"+sum_LAINNYA+"</td><td>"+(parseInt(sum_POLINDES)+parseInt(sum_PUSKESMAS)+parseInt(sum_RS)+parseInt(sum_RUMAH)+parseInt(sum_LAINNYA))+"</td></tr>";
                             html += "<tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -266,7 +266,7 @@
                     if($('#statistik').val() == 4)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Bulan</th><th scope='col'>L1</th><th scope='col'>L2</th><th scope='col'>L3</th><th scope='col'>L4</th><th scope='col'>L5</th></thead>";
+                        html += "<thead><th scope='col'>Bulan</th><th scope='col'>L1</th><th scope='col'>L2</th><th scope='col'>L3</th><th scope='col'>L4</th><th scope='col'>L5</th><th scope='col'>TOTAL</th></thead>";
 
                         //insert tbody
                         if(data.length > 0) 
@@ -286,14 +286,14 @@
                                 sum_L4 = sum_L4+parseInt(data[i]?.L4);
                                 sum_L5 = sum_L5+parseInt(data[i]?.L5);
 
-                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.L1+"</td><td>"+data[i]?.L2+"</td><td>"+data[i]?.L3+"</td><td>"+data[i]?.L4+"</td><td>"+data[i]?.L5+"</td></tr>";
+                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.L1+"</td><td>"+data[i]?.L2+"</td><td>"+data[i]?.L3+"</td><td>"+data[i]?.L4+"</td><td>"+data[i]?.L5+"</td><td>"+(parseInt(data[i]?.L1)+parseInt(data[i]?.L2)+parseInt(data[i]?.L3)+parseInt(data[i]?.L4)+parseInt(data[i]?.L5))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_L1+"</td><td>"+sum_L2+"</td><td>"+sum_L3+"</td><td>"+sum_L4+"</td><td>"+sum_L5+"</td></tr>";
+                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_L1+"</td><td>"+sum_L2+"</td><td>"+sum_L3+"</td><td>"+sum_L4+"</td><td>"+sum_L5+"</td><td>"+(parseInt(sum_L1)+parseInt(sum_L2)+parseInt(sum_L3)+parseInt(sum_L4)+parseInt(sum_L5))+"</td></tr>";
                             html += "<tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id

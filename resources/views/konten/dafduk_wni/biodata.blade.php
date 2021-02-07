@@ -252,7 +252,7 @@
                     if($('#statistik').val() == 1)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Dak. Laki-Laki</th><th scope='col'>Dak. Perempuan</th></thead>"; 
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Dak. Laki-Laki</th><th scope='col'>Dak. Perempuan</th><th scope='col'>Total</th></thead>"; 
 
                         //insert tbody
                         if(data.length > 0)
@@ -266,16 +266,16 @@
                                 sum_DAK_LK = sum_DAK_LK+parseInt(data[i]?.DAK_LK);
                                 sum_DAK_LP = sum_DAK_LP+parseInt(data[i]?.DAK_LP);
 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.DAK_LK+"</td><td>"+data[i]?.DAK_LP+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.DAK_LK+"</td><td>"+data[i]?.DAK_LP+"</td><td>"+(parseInt(data[i]?.DAK_LK)+parseInt(data[i]?.DAK_LP))+"</td></tr>";
                             }
 
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_DAK_LK+"</td><td>"+sum_DAK_LP+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_DAK_LK+"</td><td>"+sum_DAK_LP+"</td><td>"+(parseInt(sum_DAK_LK)+parseInt(sum_DAK_LP))+"</td></tr>";
 
                             html += "</tbody>";
                         } 
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -286,7 +286,7 @@
                     if($('#statistik').val() == 2)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Sort</th><th scope='col'>Laki Laki</th><th scope='col'>Perempuan</th><th scope='col'>Ada Akta</th><th scope='col'>Tidak Ada Akta</th></thead>";
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Sort</th><th scope='col'>Laki Laki</th><th scope='col'>Perempuan</th><th scope='col'>Ada Akta</th><th scope='col'>Tidak Ada Akta</th><th scope='col'>Total</th></thead>";
 
                         //insert tbody
                         if(data.length > 0) 
@@ -304,15 +304,15 @@
                                 sum_ADA_AKTA = sum_ADA_AKTA+parseInt(data[i]?.ADA_AKTA);
                                 sum_TIDAK_ADA_AKTA = sum_TIDAK_ADA_AKTA+parseInt(data[i]?.TIDAK_ADA_AKTA);
 
-                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.SORT+"</td><td>"+data[i]?.LAKI_LAKI+"</td><td>"+data[i]?.PEREMPUAN+"</td><td>"+data[i]?.ADA_AKTA+"</td><td>"+data[i]?.TIDAK_ADA_AKTA+"</td></tr>";
+                                html += "<tr role='row'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.SORT+"</td><td>"+data[i]?.LAKI_LAKI+"</td><td>"+data[i]?.PEREMPUAN+"</td><td>"+data[i]?.ADA_AKTA+"</td><td>"+data[i]?.TIDAK_ADA_AKTA+"</td><td>"+(parseInt(data[i]?.LAKI_LAKI)+parseInt(data[i]?.PEREMPUAN)+parseInt(data[i]?.ADA_AKTA)+parseInt(data[i]?.TIDAK_ADA_AKTA))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>SEMUA</td><td>"+sum_LAKI_LAKI+"</td><td>"+sum_PEREMPUAN+"</td><td>"+sum_ADA_AKTA+"</td><td>"+sum_TIDAK_ADA_AKTA+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>SEMUA</td><td>"+sum_LAKI_LAKI+"</td><td>"+sum_PEREMPUAN+"</td><td>"+sum_ADA_AKTA+"</td><td>"+sum_TIDAK_ADA_AKTA+"</td><td>"+(parseInt(sum_LAKI_LAKI)+parseInt(sum_PEREMPUAN)+parseInt(sum_ADA_AKTA)+parseInt(sum_TIDAK_ADA_AKTA))+"</td></tr>";
 
                             html += "</tbody>";
                         } 
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -323,7 +323,7 @@
                     if($('#statistik').val() == 3)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>PDD01</th><th scope='col'>PDD02</th><th scope='col'>PDD03</th><th scope='col'>PDD04</th><th scope='col'>PDD05</th><th scope='col'>PDD06</th><th scope='col'>PDD07</th><th scope='col'>PDD08</th><th scope='col'>PDD09</th><th scope='col'>PDD10</th></thead>";
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>PDD1</th><th scope='col'>PDD2</th><th scope='col'>PDD3</th><th scope='col'>PDD4</th><th scope='col'>PDD5</th><th scope='col'>PDD6</th><th scope='col'>PDD7</th><th scope='col'>PDD8</th><th scope='col'>PDD9</th><th scope='col'>PDD10</th><th scope='col'>Total</th></thead>";
 
                         //insert tbody
                         if(data.length > 0) 
@@ -347,14 +347,14 @@
                                 sum_PDD09 = sum_PDD09+parseInt(data[i]?.PDD09);
                                 sum_PDD10 = sum_PDD10+parseInt(data[i]?.PDD10);
 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.PDD01+"</td><td>"+data[i]?.PDD02+"</td><td>"+data[i]?.PDD03+"</td><td>"+data[i]?.PDD04+"</td><td>"+data[i]?.PDD05+"</td><td>"+data[i]?.PDD06+"</td><td>"+data[i]?.PDD07+"</td><td>"+data[i]?.PDD08+"</td><td>"+data[i]?.PDD09+"</td><td>"+data[i]?.PDD10+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.PDD01+"</td><td>"+data[i]?.PDD02+"</td><td>"+data[i]?.PDD03+"</td><td>"+data[i]?.PDD04+"</td><td>"+data[i]?.PDD05+"</td><td>"+data[i]?.PDD06+"</td><td>"+data[i]?.PDD07+"</td><td>"+data[i]?.PDD08+"</td><td>"+data[i]?.PDD09+"</td><td>"+data[i]?.PDD10+"</td><td>"+(parseInt(data[i]?.PDD01)+parseInt(data[i]?.PDD02)+parseInt(data[i]?.PDD03)+parseInt(data[i]?.PDD04)+parseInt(data[i]?.PDD05)+parseInt(data[i]?.PDD06)+parseInt(data[i]?.PDD07)+parseInt(data[i]?.PDD08)+parseInt(data[i]?.PDD09)+parseInt(data[i]?.PDD10))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_PDD01+"</td><td>"+sum_PDD02+"</td><td>"+sum_PDD03+"</td><td>"+sum_PDD04+"</td><td>"+sum_PDD05+"</td><td>"+sum_PDD06+"</td><td>"+sum_PDD07+"</td><td>"+sum_PDD08+"</td><td>"+sum_PDD09+"</td><td>"+sum_PDD10+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_PDD01+"</td><td>"+sum_PDD02+"</td><td>"+sum_PDD03+"</td><td>"+sum_PDD04+"</td><td>"+sum_PDD05+"</td><td>"+sum_PDD06+"</td><td>"+sum_PDD07+"</td><td>"+sum_PDD08+"</td><td>"+sum_PDD09+"</td><td>"+sum_PDD10+"</td><td>"+(sum_PDD01+sum_PDD02+sum_PDD03+sum_PDD04+sum_PDD05+sum_PDD06+sum_PDD07+sum_PDD08+sum_PDD09+sum_PDD10)+"</td></tr>";
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -365,7 +365,7 @@
                     if($('#statistik').val() == 4)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Kode Pekerjaan</th><th scope='col'>Value</th></thead>";
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Kode Pekerjaan</th><th scope='col'>Value</th><th scope='col'>Total</th></thead>";
 
                         //insert tbody
                         if(data.length > 0) 
@@ -379,14 +379,14 @@
                                 sum_KODE_PEKERJAAN = sum_KODE_PEKERJAAN+parseInt(data[i]?.KODE_PEKERJAAN);
                                 sum_VALUE = sum_VALUE+parseInt(data[i]?.VALUE);
 
-                                html += "<tr role='row'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.KODE_PEKERJAAN+"</td><td>"+data[i]?.VALUE+"</td></tr>";
+                                html += "<tr role='row'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.KODE_PEKERJAAN+"</td><td>"+data[i]?.VALUE+"</td><td>"+(parseInt(data[i]?.KODE_PEKERJAAN)+parseInt(data[i]?.VALUE))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_KODE_PEKERJAAN+"</td><td>"+sum_VALUE+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_KODE_PEKERJAAN+"</td><td>"+sum_VALUE+"</td><td>"+(parseInt(sum_KODE_PEKERJAAN)+parseInt(sum_VALUE))+"</td></tr>";
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -397,7 +397,7 @@
                     if($('#statistik').val() == 5)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Belum Kawin</th><th scope='col'>Kawin</th><th scope='col'>Cerai Hidup</th><th scope='col'>Cerai Mati</th></thead>"; 
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Belum Kawin</th><th scope='col'>Kawin</th><th scope='col'>Cerai Hidup</th><th scope='col'>Cerai Mati</th><th scope='col'>Total</th></thead>"; 
 
                         //insert tbody
                         if(data.length > 0)
@@ -413,14 +413,14 @@
                                 sum_CERAI_HIDUP = sum_CERAI_HIDUP+parseInt(data[i]?.CERAI_HIDUP);
                                 sum_CERAI_MATI = sum_CERAI_MATI+parseInt(data[i]?.CERAI_MATI);
 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.BELUM_KAWIN+"</td><td>"+data[i]?.KAWIN+"</td><td>"+data[i]?.CERAI_HIDUP+"</td><td>"+data[i]?.CERAI_MATI+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.BELUM_KAWIN+"</td><td>"+data[i]?.KAWIN+"</td><td>"+data[i]?.CERAI_HIDUP+"</td><td>"+data[i]?.CERAI_MATI+"</td><td>"+(parseInt(data[i]?.KAWIN)+parseInt(data[i]?.BELUM_KAWIN)+parseInt(data[i]?.CERAI_HIDUP)+parseInt(data[i]?.CERAI_MATI))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_BELUM_KAWIN+"</td><td>"+sum_KAWIN+"</td><td>"+sum_CERAI_HIDUP+"</td><td>"+sum_CERAI_MATI+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_BELUM_KAWIN+"</td><td>"+sum_KAWIN+"</td><td>"+sum_CERAI_HIDUP+"</td><td>"+sum_CERAI_MATI+"</td><td>"+(parseInt(sum_KAWIN)+parseInt(sum_BELUM_KAWIN)+parseInt(sum_CERAI_HIDUP)+parseInt(sum_CERAI_MATI))+"</td></tr>";
                             html += "</tbody>";
                         }
                             else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -431,7 +431,7 @@
                     if($('#statistik').val() == 6)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>A</th><th scope='col'>B</th><th scope='col'>AB</th><th scope='col'>O</th><th scope='col'>A+</th><th scope='col'>A-</th><th scope='col'>B+</th><th scope='col'>B-</th><th scope='col'>AB+</th><th scope='col'>AB-</th><th scope='col'>0+</th><th scope='col'>0-</th><th scope='col'>Tidak Tahu</th></thead>"; 
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>A</th><th scope='col'>B</th><th scope='col'>AB</th><th scope='col'>O</th><th scope='col'>A+</th><th scope='col'>A-</th><th scope='col'>B+</th><th scope='col'>B-</th><th scope='col'>AB+</th><th scope='col'>AB-</th><th scope='col'>0+</th><th scope='col'>0-</th><th scope='col'>Tidak Tahu</th><th scope='col'>Total</th></thead>"; 
 
                         //insert tbody
                         if(data.length > 0)
@@ -459,16 +459,16 @@
                                 sum_O_MIN = sum_O_MIN+parseInt(data[i]?.O_MIN);
                                 sum_TIDAK_TAHU = sum_TIDAK_TAHU+parseInt(data[i]?.TIDAK_TAHU);
 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.A+"</td><td>"+data[i]?.B+"</td><td>"+data[i]?.AB+"</td><td>"+data[i]?.O+"</td><td>"+data[i]?.A_POS+"</td><td>"+data[i]?.A_MIN+"</td><td>"+data[i]?.B_POS+"</td><td>"+data[i]?.B_MIN+"</td><td>"+data[i]?.AB_POS+"</td><td>"+data[i]?.AB_MIN+"</td><td>"+data[i]?.O_POS+"</td><td>"+data[i]?.O_MIN+"</td><td>"+data[i]?.TIDAK_TAHU+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.A+"</td><td>"+data[i]?.B+"</td><td>"+data[i]?.AB+"</td><td>"+data[i]?.O+"</td><td>"+data[i]?.A_POS+"</td><td>"+data[i]?.A_MIN+"</td><td>"+data[i]?.B_POS+"</td><td>"+data[i]?.B_MIN+"</td><td>"+data[i]?.AB_POS+"</td><td>"+data[i]?.AB_MIN+"</td><td>"+data[i]?.O_POS+"</td><td>"+data[i]?.O_MIN+"</td><td>"+data[i]?.TIDAK_TAHU+"</td><td>"+(parseInt(data[i]?.A)+parseInt(data[i]?.B)+parseInt(data[i]?.AB)+parseInt(data[i]?.O)+parseInt(data[i]?.A_POS)+parseInt(data[i]?.A_MIN)+parseInt(data[i]?.B_POS)+parseInt(data[i]?.B_MIN)+parseInt(data[i]?.AB_POS)+parseInt(data[i]?.AB_MIN)+parseInt(data[i]?.O_POS)+parseInt(data[i]?.O_MIN)+parseInt(data[i]?.TIDAK_TAHU))+"</td></tr>";
                             }
 
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_A+"</td><td>"+sum_B+"</td><td>"+sum_AB+"</td><td>"+sum_O+"</td><td>"+sum_A_POS+"</td><td>"+sum_A_MIN+"</td><td>"+sum_B_POS+"</td><td>"+sum_B_MIN+"</td><td>"+sum_AB_POS+"</td><td>"+sum_AB_MIN+"</td><td>"+sum_O_POS+"</td><td>"+sum_O_MIN+"</td><td>"+sum_TIDAK_TAHU+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_A+"</td><td>"+sum_B+"</td><td>"+sum_AB+"</td><td>"+sum_O+"</td><td>"+sum_A_POS+"</td><td>"+sum_A_MIN+"</td><td>"+sum_B_POS+"</td><td>"+sum_B_MIN+"</td><td>"+sum_AB_POS+"</td><td>"+sum_AB_MIN+"</td><td>"+sum_O_POS+"</td><td>"+sum_O_MIN+"</td><td>"+sum_TIDAK_TAHU+"</td><td>"+(parseInt(sum_A)+parseInt(sum_B)+parseInt(sum_AB)+parseInt(sum_O)+parseInt(sum_A_POS)+parseInt(sum_A_MIN)+parseInt(sum_B_POS)+parseInt(sum_B_MIN)+parseInt(sum_AB_POS)+parseInt(sum_AB_MIN)+parseInt(sum_O_POS)+parseInt(sum_O_MIN)+parseInt(sum_TIDAK_TAHU))+"</td></tr>";
 
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -479,7 +479,7 @@
                     if($('#statistik').val() == 7)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Islam</th><th scope='col'>Kristen</th><th scope='col'>Katholik</th><th scope='col'>Hindu</th><th scope='col'>Budha</th><th scope='col'>Konghucu</th><th scope='col'>Kepercayaan</th></thead>";
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Islam</th><th scope='col'>Kristen</th><th scope='col'>Katholik</th><th scope='col'>Hindu</th><th scope='col'>Budha</th><th scope='col'>Konghucu</th><th scope='col'>Kepercayaan</th><th scope='col'>Total</th></thead>";
 
                         //insert tbody
                         if(data.length > 0)
@@ -503,14 +503,14 @@
                                 sum_KONGHUCU = sum_KONGHUCU+parseInt(data[i]?.KONGHUCU);
                                 sum_KEPERCAYAAN = sum_KEPERCAYAAN+parseInt(data[i]?.KEPERCAYAAN);
 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.ISLAM+"</td><td>"+data[i]?.KRISTEN+"</td><td>"+data[i]?.KATHOLIK+"</td><td>"+data[i]?.HINDU+"</td><td>"+data[i]?.BUDHA+"</td><td>"+data[i]?.KONGHUCU+"</td><td>"+data[i]?.KEPERCAYAAN+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.ISLAM+"</td><td>"+data[i]?.KRISTEN+"</td><td>"+data[i]?.KATHOLIK+"</td><td>"+data[i]?.HINDU+"</td><td>"+data[i]?.BUDHA+"</td><td>"+data[i]?.KONGHUCU+"</td><td>"+data[i]?.KEPERCAYAAN+"</td><td>"+(parseInt(data[i]?.ISLAM)+parseInt(data[i]?.KRISTEN)+parseInt(data[i]?.KATHOLIK)+parseInt(data[i]?.HINDU)+parseInt(data[i]?.BUDHA)+parseInt(data[i]?.KONGHUCU)+parseInt(data[i]?.KEPERCAYAAN))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_ISLAM+"</td><td>"+sum_KRISTEN+"</td><td>"+sum_KATHOLIK+"</td><td>"+sum_HINDU+"</td><td>"+sum_BUDHA+"</td><td>"+sum_KONGHUCU+"</td><td>"+sum_KEPERCAYAAN+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_ISLAM+"</td><td>"+sum_KRISTEN+"</td><td>"+sum_KATHOLIK+"</td><td>"+sum_HINDU+"</td><td>"+sum_BUDHA+"</td><td>"+sum_KONGHUCU+"</td><td>"+sum_KEPERCAYAAN+"</td><td>"+(parseInt(sum_ISLAM)+parseInt(sum_KRISTEN)+parseInt(sum_KATHOLIK)+parseInt(sum_HINDU)+parseInt(sum_BUDHA)+parseInt(sum_KONGHUCU)+parseInt(sum_KEPERCAYAAN))+"</td></tr>";
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -521,7 +521,7 @@
                     if($('#statistik').val() == 8)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Fisik</th><th scope='col'>Netra</th><th scope='col'>Rungu</th><th scope='col'>Mental</th><th scope='col'>Fisik Mental</th><th scope='col'>Lainnya</th></thead>"; 
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Fisik</th><th scope='col'>Netra</th><th scope='col'>Rungu</th><th scope='col'>Mental</th><th scope='col'>Fisik Mental</th><th scope='col'>Lainnya</th><th scope='col'>Total</th></thead>"; 
 
                         //insert tbody
                         if(data.length > 0)
@@ -543,14 +543,14 @@
                                 sum_FISIK_MENTAL = sum_FISIK_MENTAL+parseInt(data[i]?.FISIK_MENTAL);
                                 sum_LAINNYA = sum_LAINNYA+parseInt(data[i]?.LAINNYA);
 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.FISIK+"</td><td>"+data[i]?.NETRA+"</td><td>"+data[i]?.RUNGU+"</td><td>"+data[i]?.MENTAL+"</td><td>"+data[i]?.FISIK_MENTAL+"</td><td>"+data[i]?.LAINNYA+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.FISIK+"</td><td>"+data[i]?.NETRA+"</td><td>"+data[i]?.RUNGU+"</td><td>"+data[i]?.MENTAL+"</td><td>"+data[i]?.FISIK_MENTAL+"</td><td>"+data[i]?.LAINNYA+"</td><td>"+(parseInt(data[i]?.FISIK)+parseInt(data[i]?.NETRA)+parseInt(data[i]?.RUNGU)+parseInt(data[i]?.MENTAL)+parseInt(data[i]?.FISIK_MENTAL)+parseInt(data[i]?.LAINNYA))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_FISIK+"</td><td>"+sum_NETRA+"</td><td>"+sum_RUNGU+"</td><td>"+sum_MENTAL+"</td><td>"+sum_FISIK_MENTAL+"</td><td>"+sum_LAINNYA+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_FISIK+"</td><td>"+sum_NETRA+"</td><td>"+sum_RUNGU+"</td><td>"+sum_MENTAL+"</td><td>"+sum_FISIK_MENTAL+"</td><td>"+sum_LAINNYA+"</td><td>"+(parseInt(sum_FISIK)+parseInt(sum_NETRA)+parseInt(sum_RUNGU)+parseInt(sum_MENTAL)+parseInt(sum_FISIK_MENTAL)+parseInt(sum_LAINNYA))+"</td></tr>";
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -561,7 +561,7 @@
                     if($('#statistik').val() == 9)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Laki-Laki</th><th scope='col'>Perempuan</th></thead>"; 
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Laki-Laki</th><th scope='col'>Perempuan</th><th scope='col'>Total</th></thead>"; 
 
                         //insert tbody
                         
@@ -575,14 +575,14 @@
                             {
                                 sum_LK = sum_LK+parseInt(data[i]?.LK);
                                 sum_LP = sum_LP+parseInt(data[i]?.LP);
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.LK+"</td><td>"+data[i]?.LP+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.LK+"</td><td>"+data[i]?.LP+"</td><td>"+(parseInt(data[i]?.LK)+parseInt(data[i]?.LP))+"</td></tr>";
                             }
-                            html += "<tr role='row'><td><strong>TOTAL</strong></td><td>"+sum_LK+"</td><td>"+sum_LP+"</td></tr>";
+                            html += "<tr role='row'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_LK+"</td><td>"+sum_LP+"</td><td>"+(parseInt(sum_LK)+parseInt(sum_LP))+"</td></tr>";
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
@@ -593,7 +593,7 @@
                     if($('#statistik').val() == 10)
                     {
                         //insert thead
-                        html += "<thead><th scope='col'>Tanggal</th><th scope='col'>Kepala Keluarga</th><th scope='col'>Suami</th><th scope='col'>Istri</th><th scope='col'>Anak</th><th scope='col'>Menantu</th><th scope='col'>Cucu</th><th scope='col'>Orang Tua</th><th scope='col'>Mertua</th><th scope='col'>Famili Lain</th><th scope='col'>Pembantu</th><th scope='col'>Lainnya</th></thead>"; 
+                        html += "<thead><th scope='col'>Kecamatan, Desa/Kelurahan</th><th scope='col'>Kepala Keluarga</th><th scope='col'>Suami</th><th scope='col'>Istri</th><th scope='col'>Anak</th><th scope='col'>Menantu</th><th scope='col'>Cucu</th><th scope='col'>Orang Tua</th><th scope='col'>Mertua</th><th scope='col'>Famili Lain</th><th scope='col'>Pembantu</th><th scope='col'>Lainnya</th><th scope='col'>Total</th></thead>"; 
                         
                         //insert tbody
                         if(data.length > 0)
@@ -625,14 +625,14 @@
                                 sum_PEMBANTU = sum_PEMBANTU+parseInt(data[i]?.PEMBANTU);
                                 sum_LAINNYA = sum_LAINNYA+parseInt(data[i]?.LAINNYA);
                                 
-                                html += "<tr role='row' class='even'><td>"+data[i]?.BLN+"</td><td>"+data[i]?.KEPALA_KELUARGA+"</td><td>"+data[i]?.SUAMI+"</td><td>"+data[i]?.ISTRI+"</td><td>"+data[i]?.ANAK+"</td><td>"+data[i]?.MENANTU+"</td><td>"+data[i]?.CUCU+"</td><td>"+data[i]?.ORANG_TUA+"</td><td>"+data[i]?.MERTUA+"</td><td>"+data[i]?.FAMILI_LAIN+"</td><td>"+data[i]?.PEMBANTU+"</td><td>"+data[i]?.LAINNYA+"</td></tr>";
+                                html += "<tr role='row' class='even'><td>"+data[i]?.NAMA_KEC+", "+data[i]?.NAMA_KEL+"</td><td>"+data[i]?.KEPALA_KELUARGA+"</td><td>"+data[i]?.SUAMI+"</td><td>"+data[i]?.ISTRI+"</td><td>"+data[i]?.ANAK+"</td><td>"+data[i]?.MENANTU+"</td><td>"+data[i]?.CUCU+"</td><td>"+data[i]?.ORANG_TUA+"</td><td>"+data[i]?.MERTUA+"</td><td>"+data[i]?.FAMILI_LAIN+"</td><td>"+data[i]?.PEMBANTU+"</td><td>"+data[i]?.LAINNYA+"</td><td>"+(parseInt(data[i]?.KEPALA_KELUARGA)+parseInt(data[i]?.SUAMI)+parseInt(data[i]?.ISTRI)+parseInt(data[i]?.ANAK)+parseInt(data[i]?.MENANTU)+parseInt(data[i]?.CUCU)+parseInt(data[i]?.ORANG_TUA)+parseInt(data[i]?.MERTUA)+parseInt(data[i]?.FAMILI_LAIN)+parseInt(data[i]?.PEMBANTU)+parseInt(data[i]?.LAINNYA))+"</td></tr>";
                             }
-                            html += "<tr role='row' class='even'><td><strong>TOTAL</strong></td><td>"+sum_KEPALA_KELUARGA+"</td><td>"+sum_SUAMI+"</td><td>"+sum_ISTRI+"</td><td>"+sum_ANAK+"</td><td>"+sum_MENANTU+"</td><td>"+sum_CUCU+"</td><td>"+sum_ORANG_TUA+"</td><td>"+sum_MERTUA+"</td><td>"+sum_FAMILI_LAIN+"</td><td>"+sum_PEMBANTU+"</td><td>"+sum_LAINNYA+"</td></tr>";
+                            html += "<tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>"+sum_KEPALA_KELUARGA+"</td><td>"+sum_SUAMI+"</td><td>"+sum_ISTRI+"</td><td>"+sum_ANAK+"</td><td>"+sum_MENANTU+"</td><td>"+sum_CUCU+"</td><td>"+sum_ORANG_TUA+"</td><td>"+sum_MERTUA+"</td><td>"+sum_FAMILI_LAIN+"</td><td>"+sum_PEMBANTU+"</td><td>"+sum_LAINNYA+"</td><td>"+(parseInt(data[i]?.KEPALA_KELUARGA)+parseInt(sum_SUAMI)+parseInt(sum_ISTRI)+parseInt(sum_ANAK)+parseInt(sum_MENANTU)+parseInt(sum_CUCU)+parseInt(sum_ORANG_TUA)+parseInt(sum_MERTUA)+parseInt(sum_FAMILI_LAIN)+parseInt(sum_PEMBANTU)+parseInt(sum_LAINNYA))+"</td></tr>";
                             html += "</tbody>";
                         }
                         else
                         {
-                            html += "<tbody><tr role='row' class='even'><td><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
+                            html += "<tbody><tr role='row' class='even'><td class='text-center'><strong>TOTAL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>";
                         }
 
                         //insert ke id
