@@ -41,7 +41,7 @@
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
                     </button>
-                    <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
+                    <button type="submit" class="btn btn-success mr-1 mb-1">Submit</button>
                 </div>
             </form>
             {{-- form End --}}
